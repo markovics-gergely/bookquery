@@ -1,0 +1,188 @@
+﻿<Page
+    x:Class="bookquery.Views.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="using:bookquery.ViewModels"
+    xmlns:common="using:bookquery.common"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Page.DataContext>
+        <vm:MainPageViewModel x:Name="ViewModel" />
+    </Page.DataContext>
+
+    <Page.Resources>
+        <common:BooleanToColorConverter x:Key="boolColor" />
+    </Page.Resources>
+    
+    <Grid HorizontalAlignment="Stretch" Background="LightGray">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*"/>
+      </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Grid.Column="0" VerticalAlignment="Top" Margin="10,5,10,0" CornerRadius="5"
+              BorderThickness="2" BorderBrush="Gray" Background="#F0F0F0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Grid.Row="0" Grid.Column="0" CornerRadius="5" VerticalAlignment="Center"
+                    Margin="10,10,10,10" Padding="10,10,10,10" Background="#337ab7">
+                <Grid HorizontalAlignment="Stretch">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="Title" Foreground="#F0F0F0" Padding="0,0,0,5"/>
+                    <StackPanel Padding="0,-5,-5,5">
+                        <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xF142;" HorizontalAlignment="Right" VerticalAlignment="Top"
+                              Foreground="#F0F0F0" ToolTipService.ToolTip="{Binding SearchHelpText}" ToolTipService.Placement="Bottom"/>
+                    </StackPanel>
+                </Grid>
+
+                <TextBox x:Name="Title" Text="{Binding SearchTitle, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged }" CornerRadius="5" Background="#F0F0F0" BorderThickness="0" 
+                         PlaceholderText="Search by Title" Padding="10,5,5,5"/>
+            </StackPanel>
+
+            <StackPanel Grid.Row="0" Grid.Column="1" CornerRadius="5" VerticalAlignment="Center"
+                    Margin="10,10,10,10" Padding="10,10,10,10" Background="#337ab7">
+                <Grid HorizontalAlignment="Stretch">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="Author" Foreground="#F0F0F0" Padding="0,0,0,5"/>
+                    <StackPanel Padding="0,-5,-5,5">
+                        <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xF142;" HorizontalAlignment="Right" VerticalAlignment="Top"
+                              Foreground="#F0F0F0" ToolTipService.ToolTip="{Binding SearchHelpText}" ToolTipService.Placement="Bottom"/>
+                    </StackPanel>
+                </Grid>
+
+                <TextBox x:Name="Author" Text="{Binding SearchAuthor, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged }" CornerRadius="5" Background="#F0F0F0" BorderThickness="0" 
+                         PlaceholderText="Search by Author" Padding="10,5,5,5"/>
+            </StackPanel>
+
+            <StackPanel Grid.Row="0" Grid.Column="2" CornerRadius="5" VerticalAlignment="Center"
+                    Margin="10,10,10,10" Padding="10,10,10,10" Background="#337ab7">
+                <Grid HorizontalAlignment="Stretch">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="Genre" Foreground="#F0F0F0" Padding="0,0,0,5"/>
+                    <StackPanel Padding="0,-5,-5,5">
+                        <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xF142;" HorizontalAlignment="Right" VerticalAlignment="Top"
+                              Foreground="#F0F0F0" ToolTipService.ToolTip="{Binding SearchHelpText}" ToolTipService.Placement="Bottom"/>
+                    </StackPanel>
+                </Grid>
+                <TextBox x:Name="Genre" Text="{Binding SearchGenre, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged }" CornerRadius="5" Background="#F0F0F0" BorderThickness="0" 
+                         PlaceholderText="Search by Genre" Padding="10,5,5,5"/>
+            </StackPanel>
+            <Button Command="{Binding QueryCommand}" Grid.Row="0" Grid.Column="3" CornerRadius="5" VerticalAlignment="Stretch"
+                    Margin="10,10,10,10" Padding="10,10,10,10" Background="#337ab7">
+                <Button.KeyboardAccelerators>
+                    <KeyboardAccelerator Key="Enter" />
+                </Button.KeyboardAccelerators>
+                <StackPanel >
+                    <TextBlock Text="Send" Foreground="#F0F0F0"/>
+                    <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE724;" Foreground="#F0F0F0" />
+                </StackPanel>
+            </Button>
+        </Grid>
+
+        <Grid Grid.Row="1" Grid.Column="0" BorderThickness="2" BorderBrush="Gray" Margin="10,5,10,5"
+              VerticalAlignment="Stretch" CornerRadius="5" Background="#F0F0F0" Grid.RowSpan="2">
+            <ListView ItemsSource="{Binding bookHeaders, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                      IsItemClickEnabled="False"
+                      SelectionChanged="BookHeader_Clicked">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                        <Setter Property="Padding" Value="10, 0, 10, 0"/>
+                        <Setter Property="Margin" Value="5"/>
+                        <Setter Property="BorderThickness" Value="2"/>
+                        <Setter Property="BorderBrush" Value="#337ab7"/>
+                        <Setter Property="CornerRadius" Value="5" />
+                    </Style>
+                </ListView.ItemContainerStyle>
+                <ListView.ItemTemplate>
+                    <DataTemplate x:Name="BookTemplate">
+                        <Grid Margin="0, 5, 0, 5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <StackPanel Grid.Row="0" Grid.Column="0" Margin="0,0,0,0" >
+                                <Image Source="{Binding ImageSource, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Stretch="None"/>
+                            </StackPanel>
+                            <StackPanel Grid.Row="0" Grid.Column="1" Margin="10,0,0,0" VerticalAlignment="Center">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    <StackPanel Grid.Row="0" Grid.Column="0">
+                                        <TextBlock Text="{Binding Authors, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                                   Foreground="{Binding isClicked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource boolColor}}"/>
+                                    </StackPanel>
+                                    <StackPanel Grid.Row="1" Grid.Column="0">
+                                        <TextBlock Text="{Binding Title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Foreground="Black" />
+                                    </StackPanel>
+                                </Grid>
+                                
+                            </StackPanel>
+                            <StackPanel Grid.Row="0" Grid.Column="2" Margin="10,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Right"
+                                        Visibility="{Binding isClicked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                <TextBlock Text="{Binding Subtitle, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Foreground="#F0F0F0" />
+                            </StackPanel>
+                            <StackPanel Grid.Row="0" Grid.Column="3" Margin="10,0,0,0" VerticalAlignment="Center" HorizontalAlignment="Right"
+                                        Visibility="{Binding isClicked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                <Button Click="Navigate_to_Details" CornerRadius="10">
+                                    <Grid Margin="0, 5, 0, 5">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*"/>
+                                        </Grid.RowDefinitions>
+                                        <TextBlock Grid.Row="0" Grid.Column="0" Text="Details" Foreground="LightGray" />
+                                        <FontIcon Grid.Row="0" Grid.Column="1" FontFamily="Segoe MDL2 Assets" Glyph="&#xE974;" Foreground="LightGray"/>
+                                    </Grid>
+                                </Button>
+                            </StackPanel>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+    </Grid>
+</Page>

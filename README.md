@@ -1,0 +1,2 @@
+# bookquery
+ UWP Client Application
